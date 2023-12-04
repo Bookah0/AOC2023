@@ -3,35 +3,31 @@ import re
 INPUT_FILE = 'Input/Day2_1.txt'
 
 def is_game_valid(line):
-    round_list = []
-    for s in line.split('; '):
-        round_list.append(s.split(', '))
+    round_list = [s.split(', ') for s in line.split('; ')]
     for r in round_list:
         for take_out in r:
-            match = re.match('(.+) (.+)', take_out)
-            if match.group(2) == 'blue' and int(match.group(1)) > 14:
+            num, color = re.match('(.+) (.+)', take_out).groups()
+            if color == 'blue' and int(num) > 14:
                 return False
-            elif match.group(2) == 'red' and int(match.group(1)) > 12:
+            elif color == 'red' and int(num) > 12:
                 return False
-            elif match.group(2) == 'green' and int(match.group(1)) > 13:
+            elif color == 'green' and int(num) > 13:
                 return False
     return True
 
 
 def get_power_of_cubeset(line):
-    round_list = []
+    round_list = [s.split(', ') for s in line.split('; ')]
     max_blue, max_red, max_green = 0, 0, 0
-    for s in line.split('; '):
-        round_list.append(s.split(', '))
     for r in round_list:
         for take_out in r:
-            match = re.match('(.+) (.+)', take_out)
-            if match.group(2) == 'blue':
-                max_blue = max(max_blue, int(match.group(1)))
-            elif match.group(2) == 'red':
-                max_red = max(max_red, int(match.group(1)))
-            elif match.group(2) == 'green':
-                max_green = max(max_green, int(match.group(1)))
+            num, color = re.match('(.+) (.+)', take_out).groups()
+            if color == 'blue':
+                max_blue = max(max_blue, int(num))
+            elif color == 'red':
+                max_red = max(max_red, int(num))
+            elif color == 'green':
+                max_green = max(max_green, int(num))
     return max_blue*max_red*max_green
 
 

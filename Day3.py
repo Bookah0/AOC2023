@@ -14,7 +14,6 @@ def get_adjacent_numbers(gear_ind, line:str):
             for j in range(len(cur_num)):
                 numbers[i-j-1] = cur_num
             cur_num = ''
-    print(numbers)
     if gear_ind-1 in numbers:
         adjacent_numbers.append(numbers[gear_ind-1])
     if gear_ind + 1 in numbers and numbers[gear_ind+1] not in adjacent_numbers:

@@ -1,31 +1,26 @@
-def combine_first_and_last_digit2(input: str):
-    first_digit, last_digit = None, None
 
+def combine_first_and_last_digit2(input, first=None, last=None):
     for i in range(len(input)):
-        str_number = str_to_number(input[i:])
-
+        cur_digit = str_to_number(input[i:])
         if input[i].isdigit():
-            if first_digit is None:
-                first_digit = input[i]
-            last_digit = input[i]
-        elif str_number is not None:
-            if first_digit is None:
-                first_digit = str_number
-            last_digit = str_number
+            cur_digit = input[i]
 
-    return first_digit + last_digit
+        if cur_digit is not None:
+            if first is None:
+                first = cur_digit
+            last = cur_digit
+
+    return first + last
 
 
-def combine_first_and_last_digit1(input: str):
-    first_digit, last_digit = None, None
-
+def combine_first_and_last_digit1(input, first=None, last=None):
     for i in range(len(input)):
         if input[i].isdigit():
-            if first_digit is None:
-                first_digit = input[i]
-            last_digit = input[i]
+            if first is None:
+                first = input[i]
+            last = input[i]
 
-    return first_digit + last_digit
+    return first + last
 
 
 def str_to_number(letters):
@@ -40,18 +35,12 @@ def str_to_number(letters):
         'eight': '8',
         'nine': '9'
     }
-
-    for number in number_dict:
-        if letters[:len(number)-1] == number:
-            return number_dict[number]
-    return None
+    return number_dict.get(letters[:len(letters) - 1], None)
 
 
 
-def solve_input(INPUT_FILE):
-    sum = 0
-    f = open(INPUT_FILE, "r")
-    for input_line in f.readlines():
+def solve_input(INPUT_FILE, sum = 0):
+    for input_line in open(INPUT_FILE, "r").readlines():
         sum += int(combine_first_and_last_digit2(input_line))
     return sum
 
