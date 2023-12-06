@@ -1,12 +1,12 @@
 def parse_input1(race_map={}):
     lines = open('Input/Day6.txt', "r").readlines()
     times, distances = lines[0].split(), lines[1].split()
-    return {'race'+str(i): {'distance': int(distances[i]), 'time': int(times[i])} for i in range(1, len(times))}
+    return {str(i): {'distance': int(distances[i]), 'time': int(times[i])} for i in range(1, len(times))}
 
 def parse_input2():
     lines = open('Input/Day6.txt', "r").readlines()
     time_line, distance_line = lines[0][9:].replace(' ', ''), lines[1][9:].replace(' ', '')
-    return { 'Race1': {'distance': int(distance_line), 'time': int(time_line)}}
+    return { '1': {'distance': int(distance_line), 'time': int(time_line)}}
 
 
 def solve_input(race_map, total=1):
@@ -17,8 +17,5 @@ def solve_input(race_map, total=1):
 
 
 if __name__ == '__main__':
-    race_map_1 = parse_input1()
-    race_map_2 = parse_input2()
-
-    # solve_input(race_map_1)
-    solve_input(race_map_2)
+    # solve_input(parse_input1())
+    solve_input(parse_input2())
